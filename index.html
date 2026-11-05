@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#09090e">
-<title>MD Mail — Premium</title>
+<title>MD Mail — MDZIM</title>
 
 <style>
 :root {
@@ -13,81 +13,115 @@
   font-family: Inter, system-ui, Arial, sans-serif;
   --red: #ff304f;
   --bg: #09090e;
-  --panel: #15151e;
-  --border: #30303c;
-  --muted: #9b9ba9;
+  --border: rgba(255, 80, 110, .25);
+  --muted: #b5b5c4;
 }
+
 * { box-sizing: border-box; }
+
 body {
   margin: 0;
-  color: #f5f5f8;
-  background:
-    radial-gradient(ellipse at 50% -10%, #451020 0%, transparent 48%),
-    var(--bg);
   min-height: 100vh;
+  color: #f5f5f8;
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(
+      rgba(0, 0, 0, .35),
+      rgba(0, 0, 0, .68)
+    ),
+    url("/madara.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
+
 main {
   max-width: 1000px;
   margin: auto;
   padding: 32px 18px 70px;
 }
+
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 12px;
-  margin-bottom: 36px;
+  margin-bottom: 42px;
 }
+
 .logo {
-  font-size: 34px;
+  font-size: 36px;
   font-weight: 950;
   letter-spacing: -1.5px;
+  text-shadow: 0 0 22px #000;
 }
-.logo span { color: var(--red); }
+
+.logo span {
+  color: var(--red);
+  text-shadow: 0 0 18px #ff304f88;
+}
+
 .tag {
   font-size: 11px;
-  color: #ff9eaf;
-  border: 1px solid #7e2940;
-  background: #30121e;
-  padding: 7px 11px;
+  color: #ffb3c1;
+  border: 1px solid #a32d49;
+  background: rgba(48, 12, 27, .8);
+  padding: 8px 12px;
   border-radius: 30px;
 }
-.hero { margin-bottom: 28px; }
+
+.hero {
+  margin-bottom: 30px;
+  text-shadow: 0 2px 12px #000;
+}
+
 .hero h1 {
   font-size: clamp(27px, 5vw, 44px);
   margin: 0 0 10px;
   letter-spacing: -1.5px;
 }
+
 .hero h1 span { color: var(--red); }
+
 .muted { color: var(--muted); }
+
 .panel {
-  background: linear-gradient(145deg, #191922, #12121a);
+  background: rgba(13, 13, 22, .76);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: 24px;
-  margin-top: 18px;
-  box-shadow: 0 12px 40px #0003;
+  margin-top: 20px;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, .4),
+    0 0 25px rgba(255, 48, 79, .06);
 }
+
 .panel h2 {
   font-size: 18px;
   margin: 0 0 17px;
 }
+
 .address {
-  background: #09090f;
-  border: 1px solid #562132;
+  background: rgba(5, 5, 12, .82);
+  border: 1px solid #69243a;
   border-radius: 13px;
   padding: 20px;
   font-size: clamp(17px, 3vw, 25px);
   font-weight: 800;
   overflow-wrap: anywhere;
-  box-shadow: inset 0 0 20px #ff304f08;
+  box-shadow: inset 0 0 20px #ff304f10;
 }
+
 .actions {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
   margin-top: 16px;
 }
+
 button {
   background: var(--red);
   border: 0;
@@ -99,18 +133,26 @@ button {
   cursor: pointer;
   transition: transform .15s, background .15s;
 }
+
 button:hover:not(:disabled) {
   transform: translateY(-2px);
   background: #ff506a;
+  box-shadow: 0 0 18px #ff304f55;
 }
-button.secondary { background: #30303e; }
+
+button.secondary {
+  background: rgba(48, 48, 62, .9);
+}
+
 button.secondary:hover:not(:disabled) {
   background: #424252;
 }
+
 button:disabled {
   opacity: .45;
   cursor: not-allowed;
 }
+
 .row {
   display: flex;
   justify-content: space-between;
@@ -118,72 +160,89 @@ button:disabled {
   flex-wrap: wrap;
   gap: 12px;
 }
+
 .status {
   min-height: 23px;
   color: #ff9aab;
   font-size: 14px;
   margin-top: 16px;
 }
+
 .inbox-item {
   display: block;
   width: 100%;
-  background: #20202c;
-  border: 1px solid #393946;
+  background: rgba(25, 25, 38, .85);
+  border: 1px solid #49404e;
   border-radius: 13px;
   padding: 17px;
   margin: 10px 0;
   text-align: left;
 }
+
 .inbox-item strong {
   display: block;
   margin: 7px 0;
 }
+
 .inbox-item small { color: #aaa; }
+
 .message-body {
   white-space: pre-wrap;
   overflow-wrap: anywhere;
   line-height: 1.7;
   padding: 15px;
-  background: #0c0c13;
+  background: rgba(5, 5, 12, .8);
   border-radius: 12px;
 }
+
 .code-box {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
-  background: #25121b;
+  background: rgba(37, 18, 27, .9);
   border: 1px solid #873149;
   border-radius: 12px;
   padding: 15px;
   margin: 10px 0;
 }
+
 .code {
   font-size: 27px;
   font-weight: 900;
   letter-spacing: 3px;
   color: #ff7890;
 }
+
 .hidden { display: none !important; }
+
 footer {
   margin-top: 35px;
-  color: #777787;
+  color: #c0b5bc;
   text-align: center;
   font-size: 12px;
+  text-shadow: 0 2px 8px black;
 }
+
 @media(max-width:600px) {
   .panel { padding: 18px; }
   .actions button { flex: 1; }
+
+  body {
+    background-attachment: scroll;
+    background-position: center top;
+  }
 }
 </style>
 </head>
 
 <body>
 <main>
+
 <header>
   <div class="logo">MD <span>MAIL</span></div>
-  <div class="tag">PREMIUM V6</div>
+  <div class="tag">MDZIM EDITION</div>
 </header>
 
 <div class="hero">
@@ -203,9 +262,15 @@ footer {
 
   <div class="actions">
     <button id="create">Gerar email</button>
-    <button id="copy" class="secondary" disabled>Copiar email</button>
-    <button id="refresh" class="secondary" disabled>Atualizar</button>
-    <button id="new" class="secondary" disabled>Nova caixa</button>
+    <button id="copy" class="secondary" disabled>
+      Copiar email
+    </button>
+    <button id="refresh" class="secondary" disabled>
+      Atualizar
+    </button>
+    <button id="new" class="secondary" disabled>
+      Nova caixa
+    </button>
   </div>
 
   <p id="status" class="status" role="status"></p>
@@ -236,16 +301,16 @@ footer {
   </div>
 
   <p id="sender" class="muted"></p>
-
   <div id="codes"></div>
-
   <div id="body" class="message-body"></div>
 </section>
 
 <footer>
-  MD MAIL © 2026 — Powered by Guerrilla Mail.
+  MD MAIL © 2026 — MDZIM EDITION.
+  Powered by Guerrilla Mail.
   Não utilize emails temporários para informações confidenciais.
 </footer>
+
 </main>
 
 <script>
@@ -266,7 +331,10 @@ function status(message) {
 
 function save() {
   if (mailbox) {
-    sessionStorage.setItem("mdmail-v6", JSON.stringify(mailbox));
+    sessionStorage.setItem(
+      "mdmail-v6",
+      JSON.stringify(mailbox)
+    );
   } else {
     sessionStorage.removeItem("mdmail-v6");
   }
@@ -301,7 +369,9 @@ async function api(action, extra = {}) {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.message || "Erro " + response.status);
+    throw new Error(
+      data.message || "Erro " + response.status
+    );
   }
 
   if (mailbox && data.md_session_cookie) {
@@ -326,7 +396,9 @@ async function create() {
     });
 
     if (!data.email_addr || !data.sid_token) {
-      throw new Error("O provedor não retornou uma caixa válida.");
+      throw new Error(
+        "O provedor não retornou uma caixa válida."
+      );
     }
 
     mailbox = {
@@ -340,7 +412,8 @@ async function create() {
     save();
 
     $("detail").classList.add("hidden");
-    $("messages").textContent = "Aguardando mensagens...";
+    $("messages").textContent =
+      "Aguardando mensagens...";
 
     status("Email criado com sucesso!");
     await refresh();
@@ -369,13 +442,21 @@ async function refresh() {
 
     if (
       data.email &&
-      data.email.toLowerCase() !== mailbox.address.toLowerCase()
+      data.email.toLowerCase() !==
+        mailbox.address.toLowerCase()
     ) {
-      throw new Error("Sessão de email diferente. Gere uma nova caixa.");
+      throw new Error(
+        "Sessão de email diferente. Gere uma nova caixa."
+      );
     }
 
-    const messages = Array.isArray(data.list) ? data.list : [];
-    const currentIds = new Set(messages.map(m => String(m.mail_id)));
+    const messages = Array.isArray(data.list)
+      ? data.list
+      : [];
+
+    const currentIds = new Set(
+      messages.map(m => String(m.mail_id))
+    );
 
     if (inboxInitialized) {
       const newMessages = messages.filter(
@@ -394,7 +475,8 @@ async function refresh() {
     container.replaceChildren();
 
     if (!messages.length) {
-      container.textContent = "Nenhuma mensagem recebida ainda.";
+      container.textContent =
+        "Nenhuma mensagem recebida ainda.";
       status("Caixa atualizada.");
       return;
     }
@@ -404,7 +486,8 @@ async function refresh() {
       button.className = "inbox-item";
 
       const sender = document.createElement("small");
-      sender.textContent = message.mail_from || "Desconhecido";
+      sender.textContent =
+        message.mail_from || "Desconhecido";
 
       const title = document.createElement("strong");
       title.textContent = decodeEntities(
@@ -417,11 +500,16 @@ async function refresh() {
       );
 
       button.append(sender, title, preview);
-      button.onclick = () => openMessage(message.mail_id);
+
+      button.onclick = () =>
+        openMessage(message.mail_id);
+
       container.append(button);
     }
 
-    status(messages.length + " mensagem(ns) na caixa.");
+    status(
+      messages.length + " mensagem(ns) na caixa."
+    );
 
   } catch (error) {
     status("Erro ao atualizar: " + error.message);
@@ -431,7 +519,9 @@ async function refresh() {
 }
 
 function extractCodes(text) {
-  const matches = String(text).match(/\b\d{4,8}\b/g) || [];
+  const matches =
+    String(text).match(/\b\d{4,8}\b/g) || [];
+
   return [...new Set(matches)].slice(0, 10);
 }
 
@@ -455,7 +545,9 @@ async function openMessage(id) {
       "text/html"
     );
 
-    const plainText = doc.body.textContent || "Mensagem vazia.";
+    const plainText =
+      doc.body.textContent || "Mensagem vazia.";
+
     $("body").textContent = plainText;
 
     const codes = extractCodes(
@@ -467,7 +559,8 @@ async function openMessage(id) {
 
     if (codes.length) {
       const heading = document.createElement("p");
-      heading.textContent = "Possíveis códigos detectados:";
+      heading.textContent =
+        "Possíveis códigos detectados:";
       box.append(heading);
 
       for (const code of codes) {
@@ -527,17 +620,21 @@ $("notify").onclick = async () => {
   }
 
   if (Notification.permission === "denied") {
-    status("Notificações bloqueadas nas configurações do navegador.");
+    status(
+      "Notificações bloqueadas nas configurações do navegador."
+    );
     return;
   }
 
-  const permission = await Notification.requestPermission();
+  const permission =
+    await Notification.requestPermission();
 
   if (permission === "granted") {
-    $("notify").textContent = "🔔 Notificações ativadas";
+    $("notify").textContent =
+      "🔔 Notificações ativadas";
     status("Notificações ativadas!");
   } else {
-    status("Permissão de notificações não concedida.");
+    status("Permissão não concedida.");
   }
 };
 
@@ -548,7 +645,9 @@ $("copy").onclick = async () => {
   if (!mailbox) return;
 
   try {
-    await navigator.clipboard.writeText(mailbox.address);
+    await navigator.clipboard.writeText(
+      mailbox.address
+    );
     status("Endereço copiado!");
   } catch {
     status("Não foi possível copiar.");
@@ -556,7 +655,9 @@ $("copy").onclick = async () => {
 };
 
 $("new").onclick = () => {
-  if (!confirm("Descartar a caixa atual e gerar outra?")) return;
+  if (!confirm(
+    "Descartar a caixa atual e gerar outra?"
+  )) return;
 
   mailbox = null;
   knownIds = new Set();
@@ -564,7 +665,8 @@ $("new").onclick = () => {
   save();
 
   $("detail").classList.add("hidden");
-  $("messages").textContent = "Preparando nova caixa...";
+  $("messages").textContent =
+    "Preparando nova caixa...";
 
   updateUI();
   create();
@@ -575,7 +677,9 @@ $("back").onclick = () => {
 };
 
 try {
-  const saved = JSON.parse(sessionStorage.getItem("mdmail-v6"));
+  const saved = JSON.parse(
+    sessionStorage.getItem("mdmail-v6")
+  );
 
   if (saved?.address && saved?.sid_token) {
     mailbox = saved;
@@ -589,11 +693,17 @@ if (
   "Notification" in window &&
   Notification.permission === "granted"
 ) {
-  $("notify").textContent = "🔔 Notificações ativadas";
+  $("notify").textContent =
+    "🔔 Notificações ativadas";
 }
 
 setInterval(() => {
-  if (mailbox && !busy && !refreshing && !document.hidden) {
+  if (
+    mailbox &&
+    !busy &&
+    !refreshing &&
+    !document.hidden
+  ) {
     refresh();
   }
 }, 30000);
