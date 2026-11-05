@@ -3,19 +3,30 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MD Mail — Email temporário</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MD Mail v4</title>
 <style>
 :root {
   color-scheme: dark;
   font-family: Inter, system-ui, Arial, sans-serif;
 }
 * { box-sizing: border-box; }
-body { margin: 0; background: #0b0b10; color: #f5f5f7; }
-main { max-width: 920px; margin: 45px auto; padding: 20px; }
-.logo { font-size: 32px; font-weight: 900; }
+body {
+  margin: 0;
+  background: #0b0b10;
+  color: #f5f5f7;
+}
+main {
+  max-width: 920px;
+  margin: 45px auto;
+  padding: 20px;
+}
+.logo {
+  font-size: 36px;
+  font-weight: 900;
+}
 .logo span { color: #ff334d; }
-.sub, .muted { color: #a5a5b3; }
+.muted { color: #a5a5b3; }
 .panel {
   background: #16161e;
   border: 1px solid #33333e;
@@ -25,13 +36,13 @@ main { max-width: 920px; margin: 45px auto; padding: 20px; }
 }
 h2 { font-size: 19px; margin: 0 0 15px; }
 .address {
-  overflow-wrap: anywhere;
+  background: #0e0e14;
+  border: 1px solid #363640;
+  border-radius: 12px;
+  padding: 18px;
   font-size: 23px;
   font-weight: 700;
-  background: #0e0e14;
-  padding: 17px;
-  border-radius: 12px;
-  border: 1px solid #363640;
+  overflow-wrap: anywhere;
 }
 button {
   border: 0;
@@ -43,275 +54,319 @@ button {
   cursor: pointer;
 }
 button.secondary { background: #30303d; }
-button:disabled { opacity: .45; cursor: wait; }
-.actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
-.row { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
 .item {
   display: block;
   width: 100%;
   text-align: left;
   background: #22222e;
   border: 1px solid #393945;
-  margin: 8px 0;
+  border-radius: 10px;
   padding: 16px;
+  margin: 8px 0;
 }
-.item strong { display: block; margin: 5px 0; }
+.item strong {
+  display: block;
+  margin: 5px 0;
+}
 .item small { color: #aaa; }
-#body { white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.6; }
+#status {
+  min-height: 24px;
+  color: #ff8798;
+}
+#body {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.6;
+}
 .hidden { display: none; }
-#status { min-height: 24px; color: #ff8798; }
-footer { margin-top: 30px; color: #aaa; font-size: 13px; }
-a { color: #ff8798; }
-label { display: flex; gap: 8px; align-items: center; font-size: 14px; color: #bbb; }
+footer {
+  margin-top: 30px;
+  color: #aaa;
+  font-size: 13px;
+}
 </style>
 </head>
 <body>
 <main>
-  <div class="logo">MD <span>MAIL</span></div>
-  <p class="sub">Seu email temporário, sem cadastro.</p>
+<div class="logo">MD <span>MAIL</span></div>
+<p class="muted">Seu email temporário, sem cadastro.</p>
 
-  <section class="panel">
-    <h2>Endereço temporário</h2>
-    <div class="address" id="address">Nenhuma caixa criada</div>
-    <div class="actions">
-      <button id="create">Gerar email</button>
-      <button id="copy" class="secondary" disabled>Copiar</button>
-      <button id="refresh" class="secondary" disabled>Atualizar caixa</button>
-      <button id="delete" class="secondary" disabled>Excluir caixa</button>
-    </div>
-    <p id="status" role="status"></p>
-  </section>
+<section class="panel">
+<h2>Endereço temporário</h2>
+<div id="address" class="address">
+  Nenhuma caixa criada
+</div>
+<div class="actions">
+<button id="create">Gerar email</button>
+<button id="copy" class="secondary" disabled>Copiar</button>
+<button id="refresh" class="secondary" disabled>Atualizar caixa</button>
+<button id="clear" class="secondary" disabled>Nova caixa</button>
+</div>
+<p id="status" role="status"></p>
+</section>
 
-  <section class="panel">
-    <div class="row">
-      <h2>Caixa de entrada</h2>
-      <label><input type="checkbox" id="auto" checked> Atualizar a cada 15 segundos</label>
-    </div>
-    <div id="messages" class="muted">Gere um endereço para começar.</div>
-  </section>
+<section class="panel">
+<h2>Caixa de entrada</h2>
+<p class="muted">Atualização automática a cada 20 segundos.</p>
+<div id="messages" class="muted">
+  Gere um endereço para começar.
+</div>
+</section>
 
-  <section class="panel hidden" id="detail">
-    <div class="row">
-      <h2 id="subject"></h2>
-      <button id="back" class="secondary">Voltar</button>
-    </div>
-    <p class="muted" id="sender"></p>
-    <div id="body"></div>
-    <p id="codes"></p>
-  </section>
+<section class="panel hidden" id="detail">
+<h2 id="subject"></h2>
+<p id="sender" class="muted"></p>
+<div id="body"></div>
+<div class="actions">
+<button id="back" class="secondary">Voltar</button>
+</div>
+</section>
 
-  <footer>
-    Serviço de email fornecido por
-    <a href="https://mail.tm" target="_blank" rel="noopener noreferrer">Mail.tm</a>.
-    Não use para mensagens confidenciais.
-  </footer>
+<footer>
+MD Mail v4 — Serviço de email fornecido por Guerrilla Mail.
+Não utilize para mensagens confidenciais.
+</footer>
 </main>
 
 <script>
-'use strict';
+"use strict";
 
-const API = '/api/mail';
-let account = null;
-let token = null;
-let busy = false;
-
+const API = "/api/guerrilla";
 const $ = id => document.getElementById(id);
-function status(s) { $('status').textContent = s || ''; }
 
-function randomString(n) {
-  const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-  const bytes = new Uint8Array(n);
-  crypto.getRandomValues(bytes);
-  return Array.from(bytes, b => chars[b % chars.length]).join('');
-}
+let mailbox = null;
+let loading = false;
+let refreshing = false;
 
-async function request(path, opts = {}) {
-  const response = await fetch(API + path, {
-    ...opts,
-    headers: {
-      Accept: 'application/json',
-      ...(opts.body ? {'Content-Type': 'application/json'} : {}),
-      ...(token ? {Authorization: 'Bearer ' + token} : {}),
-      ...(opts.headers || {})
-    }
-  });
-
-  if (!response.ok) {
-    let msg = 'Erro ' + response.status;
-    try {
-      const j = await response.json();
-      msg = j['hydra:description'] || j.detail || j.message || msg;
-    } catch {}
-    throw new Error(msg);
-  }
-
-  if (response.status === 204) return null;
-  return response.json();
-}
-
-function collection(d) {
-  if (Array.isArray(d)) return d;
-  if (Array.isArray(d?.['hydra:member'])) return d['hydra:member'];
-  if (Array.isArray(d?.member)) return d.member;
-  return [];
+function status(message) {
+  $("status").textContent = message || "";
 }
 
 function updateUI() {
-  const yes = !!account;
-  $('address').textContent = account?.address || 'Nenhuma caixa criada';
+  $("address").textContent =
+    mailbox?.address || "Nenhuma caixa criada";
 
-  for (const id of ['copy', 'refresh', 'delete']) {
-    $(id).disabled = !yes || busy;
+  $("create").disabled = loading;
+  $("copy").disabled = !mailbox || loading;
+  $("refresh").disabled = !mailbox || loading;
+  $("clear").disabled = !mailbox || loading;
+}
+
+async function api(action, extra = {}) {
+  const response = await fetch(API, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      action,
+      ...(mailbox ? {
+        sid_token: mailbox.sid_token
+      } : {}),
+      ...extra
+    })
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(
+      data.message || "Erro " + response.status
+    );
   }
 
-  $('create').disabled = busy;
-  $('create').textContent = busy ? 'Aguarde...' : 'Gerar email';
+  return data;
 }
 
 async function create() {
-  if (busy) return;
+  if (loading) return;
 
-  if (account && !confirm('Criar outra caixa? Você perderá acesso à caixa atual nesta aba.')) return;
-
-  busy = true;
+  loading = true;
   updateUI();
-  status('Criando caixa...');
+  status("Gerando endereço...");
 
   try {
-    const d = await request('/domains');
+    const data = await api("get_email_address");
 
-    const domains = collection(d).filter(
-      x => x.isActive === true && x.isPrivate === false
-    );
-
-    if (!domains.length) {
-      throw new Error('Nenhum domínio público disponível agora.');
+    if (!data.email_addr || !data.sid_token) {
+      throw new Error(
+        "O provedor não retornou uma caixa válida."
+      );
     }
 
-    const address = 'md' + randomString(12) + '@' + domains[0].domain;
-    const password = randomString(32);
+    mailbox = {
+      address: data.email_addr,
+      sid_token: data.sid_token
+    };
 
-    const created = await request('/accounts', {
-      method: 'POST',
-      body: JSON.stringify({address, password})
-    });
+    sessionStorage.setItem(
+      "mdmail",
+      JSON.stringify(mailbox)
+    );
 
-    const auth = await request('/token', {
-      method: 'POST',
-      body: JSON.stringify({address, password})
-    });
+    $("detail").classList.add("hidden");
+    $("messages").textContent =
+      "Aguardando mensagens...";
 
-    account = {id: created.id, address};
-    token = auth.token;
-
-    $('detail').classList.add('hidden');
-    $('messages').textContent = 'Aguardando mensagens...';
-    status('Caixa criada! Copie o endereço e aguarde mensagens.');
-
+    status("Email criado com sucesso!");
     await refresh();
-  } catch (e) {
-    status('Não foi possível criar: ' + e.message);
+
+  } catch (error) {
+    status("Erro ao gerar: " + error.message);
   } finally {
-    busy = false;
+    loading = false;
     updateUI();
   }
 }
 
 async function refresh() {
-  if (!token) return;
+  if (!mailbox || refreshing) return;
+
+  refreshing = true;
 
   try {
-    const d = await request('/messages');
-    const messages = collection(d);
-    const box = $('messages');
-    box.replaceChildren();
+    const data = await api("check_email");
+
+    const messages = Array.isArray(data.list)
+      ? data.list
+      : [];
+
+    const container = $("messages");
+    container.replaceChildren();
 
     if (!messages.length) {
-      box.textContent = 'Nenhuma mensagem ainda.';
+      container.textContent =
+        "Nenhuma mensagem recebida ainda.";
       return;
     }
 
-    for (const m of messages) {
-      const btn = document.createElement('button');
-      btn.className = 'item';
+    for (const message of messages) {
+      const button = document.createElement("button");
+      button.className = "item";
 
-      const from = document.createElement('small');
-      from.textContent = m.from?.address || 'Remetente desconhecido';
+      const sender = document.createElement("small");
+      sender.textContent =
+        message.mail_from || "Remetente desconhecido";
 
-      const title = document.createElement('strong');
-      title.textContent = m.subject || '(Sem assunto)';
+      const title = document.createElement("strong");
+      title.textContent =
+        message.mail_subject || "(Sem assunto)";
 
-      const intro = document.createElement('span');
-      intro.textContent = m.intro || '';
+      const preview = document.createElement("span");
+      preview.textContent =
+        message.mail_excerpt || "";
 
-      btn.append(from, title, intro);
-      btn.addEventListener('click', () => openMessage(m.id));
-      box.append(btn);
+      button.append(sender, title, preview);
+
+      button.onclick = () =>
+        openMessage(message.mail_id);
+
+      container.append(button);
     }
 
-    status('Mensagens atualizadas.');
-  } catch (e) {
-    status('Falha ao atualizar: ' + e.message);
+  } catch (error) {
+    status("Erro ao atualizar: " + error.message);
+  } finally {
+    refreshing = false;
   }
 }
 
 async function openMessage(id) {
-  try {
-    const m = await request('/messages/' + encodeURIComponent(id));
-
-    $('subject').textContent = m.subject || '(Sem assunto)';
-    $('sender').textContent = 'De: ' + (m.from?.address || 'Desconhecido');
-    $('body').textContent = m.text || 'Sem versão em texto.';
-
-    const codes = (m.verifications || []).filter(x => typeof x === 'string');
-    $('codes').textContent = codes.length
-      ? 'Códigos detectados: ' + codes.join(', ')
-      : '';
-
-    $('detail').classList.remove('hidden');
-  } catch (e) {
-    status('Não foi possível abrir: ' + e.message);
-  }
-}
-
-async function remove() {
-  if (!account || !confirm('Excluir esta caixa definitivamente?')) return;
+  if (!mailbox) return;
 
   try {
-    await request('/accounts/' + encodeURIComponent(account.id), {
-      method: 'DELETE'
+    const data = await api("fetch_email", {
+      email_id: id
     });
 
-    account = null;
-    token = null;
+    $("subject").textContent =
+      data.mail_subject || "(Sem assunto)";
 
-    $('detail').classList.add('hidden');
-    $('messages').textContent = 'Gere um endereço para começar.';
-    status('Caixa excluída.');
-    updateUI();
-  } catch (e) {
-    status('Falha ao excluir: ' + e.message);
+    $("sender").textContent =
+      "De: " + (data.mail_from || "Desconhecido");
+
+    const html = data.mail_body || "";
+
+    const doc = new DOMParser().parseFromString(
+      html,
+      "text/html"
+    );
+
+    $("body").textContent =
+      doc.body.textContent || "Mensagem vazia.";
+
+    $("detail").classList.remove("hidden");
+
+  } catch (error) {
+    status("Erro ao abrir: " + error.message);
   }
 }
 
-$('create').onclick = create;
-$('refresh').onclick = refresh;
-$('delete').onclick = remove;
-$('back').onclick = () => $('detail').classList.add('hidden');
+$("create").onclick = create;
 
-$('copy').onclick = async () => {
-  if (!account) return;
+$("copy").onclick = async () => {
+  if (!mailbox) return;
+
   try {
-    await navigator.clipboard.writeText(account.address);
-    status('Endereço copiado!');
+    await navigator.clipboard.writeText(
+      mailbox.address
+    );
+    status("Endereço copiado!");
   } catch {
-    status('Não foi possível copiar automaticamente.');
+    status("Não foi possível copiar.");
   }
 };
 
+$("refresh").onclick = refresh;
+
+$("clear").onclick = () => {
+  if (!confirm("Criar uma nova caixa temporária?")) {
+    return;
+  }
+
+  mailbox = null;
+  sessionStorage.removeItem("mdmail");
+
+  $("detail").classList.add("hidden");
+  $("messages").textContent =
+    "Gere um endereço para começar.";
+
+  updateUI();
+  create();
+};
+
+$("back").onclick = () => {
+  $("detail").classList.add("hidden");
+};
+
+try {
+  const saved = JSON.parse(
+    sessionStorage.getItem("mdmail")
+  );
+
+  if (saved?.address && saved?.sid_token) {
+    mailbox = saved;
+    refresh();
+  }
+} catch {
+  sessionStorage.removeItem("mdmail");
+}
+
 setInterval(() => {
-  if ($('auto').checked && token && !document.hidden) refresh();
-}, 15000);
+  if (mailbox && !document.hidden) {
+    refresh();
+  }
+}, 20000);
 
 updateUI();
 </script>
