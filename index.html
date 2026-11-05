@@ -1,137 +1,227 @@
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MD Mail v5</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#09090e">
+<title>MD Mail — Premium</title>
+
 <style>
 :root {
   color-scheme: dark;
-  font-family: Inter,system-ui,Arial,sans-serif;
+  font-family: Inter, system-ui, Arial, sans-serif;
+  --red: #ff304f;
+  --bg: #09090e;
+  --panel: #15151e;
+  --border: #30303c;
+  --muted: #9b9ba9;
 }
-* { box-sizing:border-box; }
+* { box-sizing: border-box; }
 body {
-  margin:0;
-  background:#0b0b10;
-  color:#f5f5f7;
+  margin: 0;
+  color: #f5f5f8;
+  background:
+    radial-gradient(ellipse at 50% -10%, #451020 0%, transparent 48%),
+    var(--bg);
+  min-height: 100vh;
 }
 main {
-  max-width:920px;
-  margin:40px auto;
-  padding:20px;
+  max-width: 1000px;
+  margin: auto;
+  padding: 32px 18px 70px;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 36px;
 }
 .logo {
-  font-size:36px;
-  font-weight:900;
+  font-size: 34px;
+  font-weight: 950;
+  letter-spacing: -1.5px;
 }
-.logo span { color:#ff334d; }
-.muted { color:#a5a5b3; }
+.logo span { color: var(--red); }
+.tag {
+  font-size: 11px;
+  color: #ff9eaf;
+  border: 1px solid #7e2940;
+  background: #30121e;
+  padding: 7px 11px;
+  border-radius: 30px;
+}
+.hero { margin-bottom: 28px; }
+.hero h1 {
+  font-size: clamp(27px, 5vw, 44px);
+  margin: 0 0 10px;
+  letter-spacing: -1.5px;
+}
+.hero h1 span { color: var(--red); }
+.muted { color: var(--muted); }
 .panel {
-  background:#16161e;
-  border:1px solid #33333e;
-  border-radius:18px;
-  padding:24px;
-  margin-top:22px;
+  background: linear-gradient(145deg, #191922, #12121a);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 24px;
+  margin-top: 18px;
+  box-shadow: 0 12px 40px #0003;
 }
-h2 { font-size:19px; margin:0 0 15px; }
+.panel h2 {
+  font-size: 18px;
+  margin: 0 0 17px;
+}
 .address {
-  background:#0e0e14;
-  border:1px solid #363640;
-  border-radius:12px;
-  padding:18px;
-  font-size:23px;
-  font-weight:700;
-  overflow-wrap:anywhere;
-}
-button {
-  border:0;
-  border-radius:10px;
-  background:#ff334d;
-  color:white;
-  font-weight:700;
-  padding:12px 17px;
-  cursor:pointer;
-}
-button.secondary { background:#30303d; }
-button:disabled {
-  opacity:.45;
-  cursor:not-allowed;
+  background: #09090f;
+  border: 1px solid #562132;
+  border-radius: 13px;
+  padding: 20px;
+  font-size: clamp(17px, 3vw, 25px);
+  font-weight: 800;
+  overflow-wrap: anywhere;
+  box-shadow: inset 0 0 20px #ff304f08;
 }
 .actions {
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-top:14px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 16px;
 }
-.item {
-  display:block;
-  width:100%;
-  text-align:left;
-  background:#22222e;
-  border:1px solid #393945;
-  border-radius:10px;
-  padding:16px;
-  margin:8px 0;
+button {
+  background: var(--red);
+  border: 0;
+  border-radius: 11px;
+  color: white;
+  font: inherit;
+  font-weight: 750;
+  padding: 12px 17px;
+  cursor: pointer;
+  transition: transform .15s, background .15s;
 }
-.item strong {
-  display:block;
-  margin:5px 0;
+button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: #ff506a;
 }
-.item small { color:#aaa; }
-#status {
-  min-height:24px;
-  color:#ff8798;
+button.secondary { background: #30303e; }
+button.secondary:hover:not(:disabled) {
+  background: #424252;
 }
-#body {
-  white-space:pre-wrap;
-  overflow-wrap:anywhere;
-  line-height:1.6;
+button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
 }
-.hidden { display:none; }
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.status {
+  min-height: 23px;
+  color: #ff9aab;
+  font-size: 14px;
+  margin-top: 16px;
+}
+.inbox-item {
+  display: block;
+  width: 100%;
+  background: #20202c;
+  border: 1px solid #393946;
+  border-radius: 13px;
+  padding: 17px;
+  margin: 10px 0;
+  text-align: left;
+}
+.inbox-item strong {
+  display: block;
+  margin: 7px 0;
+}
+.inbox-item small { color: #aaa; }
+.message-body {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.7;
+  padding: 15px;
+  background: #0c0c13;
+  border-radius: 12px;
+}
+.code-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: #25121b;
+  border: 1px solid #873149;
+  border-radius: 12px;
+  padding: 15px;
+  margin: 10px 0;
+}
+.code {
+  font-size: 27px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  color: #ff7890;
+}
+.hidden { display: none !important; }
 footer {
-  margin-top:30px;
-  color:#aaa;
-  font-size:13px;
+  margin-top: 35px;
+  color: #777787;
+  text-align: center;
+  font-size: 12px;
+}
+@media(max-width:600px) {
+  .panel { padding: 18px; }
+  .actions button { flex: 1; }
 }
 </style>
 </head>
+
 <body>
 <main>
+<header>
+  <div class="logo">MD <span>MAIL</span></div>
+  <div class="tag">PREMIUM V6</div>
+</header>
 
-<div class="logo">MD <span>MAIL</span></div>
-<p class="muted">
-  Email temporário gratuito — MD Mail v5
-</p>
+<div class="hero">
+  <h1>Seu email. <span>Sem complicação.</span></h1>
+  <p class="muted">
+    Crie um endereço temporário, receba mensagens
+    e copie códigos de verificação.
+  </p>
+</div>
 
 <section class="panel">
-  <h2>Endereço temporário</h2>
+  <h2>✉️ Seu endereço temporário</h2>
 
-  <div id="address" class="address">
+  <div class="address" id="address">
     Nenhuma caixa criada
   </div>
 
   <div class="actions">
     <button id="create">Gerar email</button>
-    <button id="copy" class="secondary" disabled>
-      Copiar
-    </button>
-    <button id="refresh" class="secondary" disabled>
-      Atualizar caixa
-    </button>
-    <button id="new" class="secondary" disabled>
-      Nova caixa
-    </button>
+    <button id="copy" class="secondary" disabled>Copiar email</button>
+    <button id="refresh" class="secondary" disabled>Atualizar</button>
+    <button id="new" class="secondary" disabled>Nova caixa</button>
   </div>
 
-  <p id="status" role="status"></p>
+  <p id="status" class="status" role="status"></p>
 </section>
 
 <section class="panel">
-  <h2>Caixa de entrada</h2>
+  <div class="row">
+    <h2>📥 Caixa de entrada</h2>
+    <button id="notify" class="secondary">
+      🔔 Ativar notificações
+    </button>
+  </div>
 
   <p class="muted">
     Atualização automática a cada 30 segundos.
+    As notificações funcionam enquanto o site estiver aberto.
   </p>
 
   <div id="messages" class="muted">
@@ -140,21 +230,22 @@ footer {
 </section>
 
 <section class="panel hidden" id="detail">
-  <h2 id="subject"></h2>
-  <p id="sender" class="muted"></p>
-  <div id="body"></div>
-  <div class="actions">
-    <button id="back" class="secondary">
-      Voltar
-    </button>
+  <div class="row">
+    <h2 id="subject">Mensagem</h2>
+    <button id="back" class="secondary">Voltar</button>
   </div>
+
+  <p id="sender" class="muted"></p>
+
+  <div id="codes"></div>
+
+  <div id="body" class="message-body"></div>
 </section>
 
 <footer>
-  MD Mail v5 — Powered by Guerrilla Mail.
-  Não use para mensagens confidenciais.
+  MD MAIL © 2026 — Powered by Guerrilla Mail.
+  Não utilize emails temporários para informações confidenciais.
 </footer>
-
 </main>
 
 <script>
@@ -166,6 +257,8 @@ const $ = id => document.getElementById(id);
 let mailbox = null;
 let busy = false;
 let refreshing = false;
+let knownIds = new Set();
+let inboxInitialized = false;
 
 function status(message) {
   $("status").textContent = message || "";
@@ -173,12 +266,9 @@ function status(message) {
 
 function save() {
   if (mailbox) {
-    sessionStorage.setItem(
-      "mdmail-v5",
-      JSON.stringify(mailbox)
-    );
+    sessionStorage.setItem("mdmail-v6", JSON.stringify(mailbox));
   } else {
-    sessionStorage.removeItem("mdmail-v5");
+    sessionStorage.removeItem("mdmail-v6");
   }
 }
 
@@ -186,10 +276,10 @@ function updateUI() {
   $("address").textContent =
     mailbox?.address || "Nenhuma caixa criada";
 
-  $("create").disabled = busy;
-  $("copy").disabled = !mailbox || busy;
-  $("refresh").disabled = !mailbox || busy;
-  $("new").disabled = !mailbox || busy;
+  $("create").disabled = busy || !!mailbox;
+  $("copy").disabled = busy || !mailbox;
+  $("refresh").disabled = busy || !mailbox;
+  $("new").disabled = busy || !mailbox;
 }
 
 async function api(action, extra = {}) {
@@ -211,14 +301,11 @@ async function api(action, extra = {}) {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(
-      data.message || "Erro HTTP " + response.status
-    );
+    throw new Error(data.message || "Erro " + response.status);
   }
 
   if (mailbox && data.md_session_cookie) {
-    mailbox.sessionCookie =
-      data.md_session_cookie;
+    mailbox.sessionCookie = data.md_session_cookie;
     save();
   }
 
@@ -230,35 +317,30 @@ async function create() {
 
   busy = true;
   updateUI();
-  status("Criando caixa temporária...");
+  status("Criando endereço temporário...");
 
   try {
-    const data = await api(
-      "get_email_address",
-      {
-        sid_token: null,
-        sessionCookie: null
-      }
-    );
+    const data = await api("get_email_address", {
+      sid_token: null,
+      sessionCookie: null
+    });
 
     if (!data.email_addr || !data.sid_token) {
-      throw new Error(
-        "O provedor não retornou uma caixa válida."
-      );
+      throw new Error("O provedor não retornou uma caixa válida.");
     }
 
     mailbox = {
       address: data.email_addr,
       sid_token: data.sid_token,
-      sessionCookie:
-        data.md_session_cookie || null
+      sessionCookie: data.md_session_cookie || null
     };
 
+    knownIds = new Set();
+    inboxInitialized = false;
     save();
 
     $("detail").classList.add("hidden");
-    $("messages").textContent =
-      "Aguardando mensagens...";
+    $("messages").textContent = "Aguardando mensagens...";
 
     status("Email criado com sucesso!");
     await refresh();
@@ -271,6 +353,12 @@ async function create() {
   }
 }
 
+function decodeEntities(text) {
+  const el = document.createElement("textarea");
+  el.innerHTML = String(text || "");
+  return el.value;
+}
+
 async function refresh() {
   if (!mailbox || refreshing) return;
 
@@ -279,62 +367,61 @@ async function refresh() {
   try {
     const data = await api("get_email_list");
 
-    // Confere se a resposta pertence à mesma caixa.
     if (
       data.email &&
-      data.email.toLowerCase() !==
-        mailbox.address.toLowerCase()
+      data.email.toLowerCase() !== mailbox.address.toLowerCase()
     ) {
-      throw new Error(
-        "A sessão retornou outra caixa de email. " +
-        "Gere um novo endereço."
-      );
+      throw new Error("Sessão de email diferente. Gere uma nova caixa.");
     }
 
-    const messages = Array.isArray(data.list)
-      ? data.list
-      : [];
+    const messages = Array.isArray(data.list) ? data.list : [];
+    const currentIds = new Set(messages.map(m => String(m.mail_id)));
+
+    if (inboxInitialized) {
+      const newMessages = messages.filter(
+        m => !knownIds.has(String(m.mail_id))
+      );
+
+      if (newMessages.length > 0) {
+        notifyNewMail(newMessages.length);
+      }
+    }
+
+    knownIds = currentIds;
+    inboxInitialized = true;
 
     const container = $("messages");
     container.replaceChildren();
 
     if (!messages.length) {
-      container.textContent =
-        "Nenhuma mensagem recebida ainda.";
-      status("Caixa consultada. Nenhuma mensagem.");
+      container.textContent = "Nenhuma mensagem recebida ainda.";
+      status("Caixa atualizada.");
       return;
     }
 
     for (const message of messages) {
       const button = document.createElement("button");
-      button.className = "item";
+      button.className = "inbox-item";
 
       const sender = document.createElement("small");
-      sender.textContent =
-        message.mail_from || "Desconhecido";
+      sender.textContent = message.mail_from || "Desconhecido";
 
       const title = document.createElement("strong");
-      title.textContent =
-        decodeEntities(
-          message.mail_subject || "(Sem assunto)"
-        );
+      title.textContent = decodeEntities(
+        message.mail_subject || "(Sem assunto)"
+      );
 
       const preview = document.createElement("span");
-      preview.textContent =
-        decodeEntities(message.mail_excerpt || "");
+      preview.textContent = decodeEntities(
+        message.mail_excerpt || ""
+      );
 
       button.append(sender, title, preview);
-
-      button.onclick = () =>
-        openMessage(message.mail_id);
-
+      button.onclick = () => openMessage(message.mail_id);
       container.append(button);
     }
 
-    status(
-      messages.length +
-      " mensagem(ns) encontrada(s)."
-    );
+    status(messages.length + " mensagem(ns) na caixa.");
 
   } catch (error) {
     status("Erro ao atualizar: " + error.message);
@@ -343,10 +430,9 @@ async function refresh() {
   }
 }
 
-function decodeEntities(text) {
-  const element = document.createElement("textarea");
-  element.innerHTML = String(text);
-  return element.value;
+function extractCodes(text) {
+  const matches = String(text).match(/\b\d{4,8}\b/g) || [];
+  return [...new Set(matches)].slice(0, 10);
 }
 
 async function openMessage(id) {
@@ -357,10 +443,9 @@ async function openMessage(id) {
       email_id: id
     });
 
-    $("subject").textContent =
-      decodeEntities(
-        data.mail_subject || "(Sem assunto)"
-      );
+    $("subject").textContent = decodeEntities(
+      data.mail_subject || "(Sem assunto)"
+    );
 
     $("sender").textContent =
       "De: " + (data.mail_from || "Desconhecido");
@@ -370,8 +455,45 @@ async function openMessage(id) {
       "text/html"
     );
 
-    $("body").textContent =
-      doc.body.textContent || "Mensagem vazia.";
+    const plainText = doc.body.textContent || "Mensagem vazia.";
+    $("body").textContent = plainText;
+
+    const codes = extractCodes(
+      $("subject").textContent + " " + plainText
+    );
+
+    const box = $("codes");
+    box.replaceChildren();
+
+    if (codes.length) {
+      const heading = document.createElement("p");
+      heading.textContent = "Possíveis códigos detectados:";
+      box.append(heading);
+
+      for (const code of codes) {
+        const row = document.createElement("div");
+        row.className = "code-box";
+
+        const value = document.createElement("span");
+        value.className = "code";
+        value.textContent = code;
+
+        const button = document.createElement("button");
+        button.textContent = "Copiar código";
+
+        button.onclick = async () => {
+          try {
+            await navigator.clipboard.writeText(code);
+            status("Código copiado: " + code);
+          } catch {
+            status("Não foi possível copiar o código.");
+          }
+        };
+
+        row.append(value, button);
+        box.append(row);
+      }
+    }
 
     $("detail").classList.remove("hidden");
 
@@ -380,23 +502,53 @@ async function openMessage(id) {
   }
 }
 
-$("create").onclick = () => {
-  if (mailbox) {
-    status("Use Nova caixa para trocar de endereço.");
+function notifyNewMail(count) {
+  if (
+    !("Notification" in window) ||
+    Notification.permission !== "granted"
+  ) return;
+
+  try {
+    new Notification("MD Mail — Nova mensagem!", {
+      body: count === 1
+        ? "Você recebeu um novo email."
+        : "Você recebeu " + count + " novos emails.",
+      tag: "mdmail-new-message"
+    });
+  } catch {
+    status("Nova mensagem recebida!");
+  }
+}
+
+$("notify").onclick = async () => {
+  if (!("Notification" in window)) {
+    status("Seu navegador não suporta notificações.");
     return;
   }
-  create();
+
+  if (Notification.permission === "denied") {
+    status("Notificações bloqueadas nas configurações do navegador.");
+    return;
+  }
+
+  const permission = await Notification.requestPermission();
+
+  if (permission === "granted") {
+    $("notify").textContent = "🔔 Notificações ativadas";
+    status("Notificações ativadas!");
+  } else {
+    status("Permissão de notificações não concedida.");
+  }
 };
 
+$("create").onclick = create;
 $("refresh").onclick = refresh;
 
 $("copy").onclick = async () => {
   if (!mailbox) return;
 
   try {
-    await navigator.clipboard.writeText(
-      mailbox.address
-    );
+    await navigator.clipboard.writeText(mailbox.address);
     status("Endereço copiado!");
   } catch {
     status("Não foi possível copiar.");
@@ -404,16 +556,15 @@ $("copy").onclick = async () => {
 };
 
 $("new").onclick = () => {
-  if (!confirm(
-    "Descartar o acesso à caixa atual e gerar outra?"
-  )) return;
+  if (!confirm("Descartar a caixa atual e gerar outra?")) return;
 
   mailbox = null;
+  knownIds = new Set();
+  inboxInitialized = false;
   save();
 
   $("detail").classList.add("hidden");
-  $("messages").textContent =
-    "Preparando nova caixa...";
+  $("messages").textContent = "Preparando nova caixa...";
 
   updateUI();
   create();
@@ -424,28 +575,25 @@ $("back").onclick = () => {
 };
 
 try {
-  const saved = JSON.parse(
-    sessionStorage.getItem("mdmail-v5")
-  );
+  const saved = JSON.parse(sessionStorage.getItem("mdmail-v6"));
 
-  if (
-    saved?.address &&
-    saved?.sid_token
-  ) {
+  if (saved?.address && saved?.sid_token) {
     mailbox = saved;
     refresh();
   }
 } catch {
-  sessionStorage.removeItem("mdmail-v5");
+  sessionStorage.removeItem("mdmail-v6");
+}
+
+if (
+  "Notification" in window &&
+  Notification.permission === "granted"
+) {
+  $("notify").textContent = "🔔 Notificações ativadas";
 }
 
 setInterval(() => {
-  if (
-    mailbox &&
-    !busy &&
-    !refreshing &&
-    !document.hidden
-  ) {
+  if (mailbox && !busy && !refreshing && !document.hidden) {
     refresh();
   }
 }, 30000);
