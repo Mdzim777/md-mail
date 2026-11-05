@@ -4,138 +4,157 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MD Mail v4</title>
+<title>MD Mail v5</title>
 <style>
 :root {
   color-scheme: dark;
-  font-family: Inter, system-ui, Arial, sans-serif;
+  font-family: Inter,system-ui,Arial,sans-serif;
 }
-* { box-sizing: border-box; }
+* { box-sizing:border-box; }
 body {
-  margin: 0;
-  background: #0b0b10;
-  color: #f5f5f7;
+  margin:0;
+  background:#0b0b10;
+  color:#f5f5f7;
 }
 main {
-  max-width: 920px;
-  margin: 45px auto;
-  padding: 20px;
+  max-width:920px;
+  margin:40px auto;
+  padding:20px;
 }
 .logo {
-  font-size: 36px;
-  font-weight: 900;
+  font-size:36px;
+  font-weight:900;
 }
-.logo span { color: #ff334d; }
-.muted { color: #a5a5b3; }
+.logo span { color:#ff334d; }
+.muted { color:#a5a5b3; }
 .panel {
-  background: #16161e;
-  border: 1px solid #33333e;
-  border-radius: 18px;
-  padding: 24px;
-  margin-top: 22px;
+  background:#16161e;
+  border:1px solid #33333e;
+  border-radius:18px;
+  padding:24px;
+  margin-top:22px;
 }
-h2 { font-size: 19px; margin: 0 0 15px; }
+h2 { font-size:19px; margin:0 0 15px; }
 .address {
-  background: #0e0e14;
-  border: 1px solid #363640;
-  border-radius: 12px;
-  padding: 18px;
-  font-size: 23px;
-  font-weight: 700;
-  overflow-wrap: anywhere;
+  background:#0e0e14;
+  border:1px solid #363640;
+  border-radius:12px;
+  padding:18px;
+  font-size:23px;
+  font-weight:700;
+  overflow-wrap:anywhere;
 }
 button {
-  border: 0;
-  border-radius: 10px;
-  background: #ff334d;
-  color: white;
-  font-weight: 700;
-  padding: 12px 17px;
-  cursor: pointer;
+  border:0;
+  border-radius:10px;
+  background:#ff334d;
+  color:white;
+  font-weight:700;
+  padding:12px 17px;
+  cursor:pointer;
 }
-button.secondary { background: #30303d; }
+button.secondary { background:#30303d; }
 button:disabled {
-  opacity: .45;
-  cursor: not-allowed;
+  opacity:.45;
+  cursor:not-allowed;
 }
 .actions {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 14px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:14px;
 }
 .item {
-  display: block;
-  width: 100%;
-  text-align: left;
-  background: #22222e;
-  border: 1px solid #393945;
-  border-radius: 10px;
-  padding: 16px;
-  margin: 8px 0;
+  display:block;
+  width:100%;
+  text-align:left;
+  background:#22222e;
+  border:1px solid #393945;
+  border-radius:10px;
+  padding:16px;
+  margin:8px 0;
 }
 .item strong {
-  display: block;
-  margin: 5px 0;
+  display:block;
+  margin:5px 0;
 }
-.item small { color: #aaa; }
+.item small { color:#aaa; }
 #status {
-  min-height: 24px;
-  color: #ff8798;
+  min-height:24px;
+  color:#ff8798;
 }
 #body {
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-  line-height: 1.6;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  line-height:1.6;
 }
-.hidden { display: none; }
+.hidden { display:none; }
 footer {
-  margin-top: 30px;
-  color: #aaa;
-  font-size: 13px;
+  margin-top:30px;
+  color:#aaa;
+  font-size:13px;
 }
 </style>
 </head>
 <body>
 <main>
+
 <div class="logo">MD <span>MAIL</span></div>
-<p class="muted">Seu email temporário, sem cadastro.</p>
+<p class="muted">
+  Email temporário gratuito — MD Mail v5
+</p>
 
 <section class="panel">
-<h2>Endereço temporário</h2>
-<div id="address" class="address">
-  Nenhuma caixa criada
-</div>
-<div class="actions">
-<button id="create">Gerar email</button>
-<button id="copy" class="secondary" disabled>Copiar</button>
-<button id="refresh" class="secondary" disabled>Atualizar caixa</button>
-<button id="clear" class="secondary" disabled>Nova caixa</button>
-</div>
-<p id="status" role="status"></p>
+  <h2>Endereço temporário</h2>
+
+  <div id="address" class="address">
+    Nenhuma caixa criada
+  </div>
+
+  <div class="actions">
+    <button id="create">Gerar email</button>
+    <button id="copy" class="secondary" disabled>
+      Copiar
+    </button>
+    <button id="refresh" class="secondary" disabled>
+      Atualizar caixa
+    </button>
+    <button id="new" class="secondary" disabled>
+      Nova caixa
+    </button>
+  </div>
+
+  <p id="status" role="status"></p>
 </section>
 
 <section class="panel">
-<h2>Caixa de entrada</h2>
-<p class="muted">Atualização automática a cada 20 segundos.</p>
-<div id="messages" class="muted">
-  Gere um endereço para começar.
-</div>
+  <h2>Caixa de entrada</h2>
+
+  <p class="muted">
+    Atualização automática a cada 30 segundos.
+  </p>
+
+  <div id="messages" class="muted">
+    Gere um endereço para começar.
+  </div>
 </section>
 
 <section class="panel hidden" id="detail">
-<h2 id="subject"></h2>
-<p id="sender" class="muted"></p>
-<div id="body"></div>
-<div class="actions">
-<button id="back" class="secondary">Voltar</button>
-</div>
+  <h2 id="subject"></h2>
+  <p id="sender" class="muted"></p>
+  <div id="body"></div>
+  <div class="actions">
+    <button id="back" class="secondary">
+      Voltar
+    </button>
+  </div>
 </section>
 
 <footer>
-MD Mail v4 — Serviço de email fornecido por Guerrilla Mail.
-Não utilize para mensagens confidenciais.
+  MD Mail v5 — Powered by Guerrilla Mail.
+  Não use para mensagens confidenciais.
 </footer>
+
 </main>
 
 <script>
@@ -145,21 +164,32 @@ const API = "/api/guerrilla";
 const $ = id => document.getElementById(id);
 
 let mailbox = null;
-let loading = false;
+let busy = false;
 let refreshing = false;
 
 function status(message) {
   $("status").textContent = message || "";
 }
 
+function save() {
+  if (mailbox) {
+    sessionStorage.setItem(
+      "mdmail-v5",
+      JSON.stringify(mailbox)
+    );
+  } else {
+    sessionStorage.removeItem("mdmail-v5");
+  }
+}
+
 function updateUI() {
   $("address").textContent =
     mailbox?.address || "Nenhuma caixa criada";
 
-  $("create").disabled = loading;
-  $("copy").disabled = !mailbox || loading;
-  $("refresh").disabled = !mailbox || loading;
-  $("clear").disabled = !mailbox || loading;
+  $("create").disabled = busy;
+  $("copy").disabled = !mailbox || busy;
+  $("refresh").disabled = !mailbox || busy;
+  $("new").disabled = !mailbox || busy;
 }
 
 async function api(action, extra = {}) {
@@ -171,7 +201,8 @@ async function api(action, extra = {}) {
     body: JSON.stringify({
       action,
       ...(mailbox ? {
-        sid_token: mailbox.sid_token
+        sid_token: mailbox.sid_token,
+        sessionCookie: mailbox.sessionCookie
       } : {}),
       ...extra
     })
@@ -181,22 +212,34 @@ async function api(action, extra = {}) {
 
   if (!response.ok) {
     throw new Error(
-      data.message || "Erro " + response.status
+      data.message || "Erro HTTP " + response.status
     );
+  }
+
+  if (mailbox && data.md_session_cookie) {
+    mailbox.sessionCookie =
+      data.md_session_cookie;
+    save();
   }
 
   return data;
 }
 
 async function create() {
-  if (loading) return;
+  if (busy) return;
 
-  loading = true;
+  busy = true;
   updateUI();
-  status("Gerando endereço...");
+  status("Criando caixa temporária...");
 
   try {
-    const data = await api("get_email_address");
+    const data = await api(
+      "get_email_address",
+      {
+        sid_token: null,
+        sessionCookie: null
+      }
+    );
 
     if (!data.email_addr || !data.sid_token) {
       throw new Error(
@@ -206,13 +249,12 @@ async function create() {
 
     mailbox = {
       address: data.email_addr,
-      sid_token: data.sid_token
+      sid_token: data.sid_token,
+      sessionCookie:
+        data.md_session_cookie || null
     };
 
-    sessionStorage.setItem(
-      "mdmail",
-      JSON.stringify(mailbox)
-    );
+    save();
 
     $("detail").classList.add("hidden");
     $("messages").textContent =
@@ -222,9 +264,9 @@ async function create() {
     await refresh();
 
   } catch (error) {
-    status("Erro ao gerar: " + error.message);
+    status("Erro ao criar: " + error.message);
   } finally {
-    loading = false;
+    busy = false;
     updateUI();
   }
 }
@@ -235,7 +277,19 @@ async function refresh() {
   refreshing = true;
 
   try {
-    const data = await api("check_email");
+    const data = await api("get_email_list");
+
+    // Confere se a resposta pertence à mesma caixa.
+    if (
+      data.email &&
+      data.email.toLowerCase() !==
+        mailbox.address.toLowerCase()
+    ) {
+      throw new Error(
+        "A sessão retornou outra caixa de email. " +
+        "Gere um novo endereço."
+      );
+    }
 
     const messages = Array.isArray(data.list)
       ? data.list
@@ -247,6 +301,7 @@ async function refresh() {
     if (!messages.length) {
       container.textContent =
         "Nenhuma mensagem recebida ainda.";
+      status("Caixa consultada. Nenhuma mensagem.");
       return;
     }
 
@@ -256,15 +311,17 @@ async function refresh() {
 
       const sender = document.createElement("small");
       sender.textContent =
-        message.mail_from || "Remetente desconhecido";
+        message.mail_from || "Desconhecido";
 
       const title = document.createElement("strong");
       title.textContent =
-        message.mail_subject || "(Sem assunto)";
+        decodeEntities(
+          message.mail_subject || "(Sem assunto)"
+        );
 
       const preview = document.createElement("span");
       preview.textContent =
-        message.mail_excerpt || "";
+        decodeEntities(message.mail_excerpt || "");
 
       button.append(sender, title, preview);
 
@@ -274,11 +331,22 @@ async function refresh() {
       container.append(button);
     }
 
+    status(
+      messages.length +
+      " mensagem(ns) encontrada(s)."
+    );
+
   } catch (error) {
     status("Erro ao atualizar: " + error.message);
   } finally {
     refreshing = false;
   }
+}
+
+function decodeEntities(text) {
+  const element = document.createElement("textarea");
+  element.innerHTML = String(text);
+  return element.value;
 }
 
 async function openMessage(id) {
@@ -290,15 +358,15 @@ async function openMessage(id) {
     });
 
     $("subject").textContent =
-      data.mail_subject || "(Sem assunto)";
+      decodeEntities(
+        data.mail_subject || "(Sem assunto)"
+      );
 
     $("sender").textContent =
       "De: " + (data.mail_from || "Desconhecido");
 
-    const html = data.mail_body || "";
-
     const doc = new DOMParser().parseFromString(
-      html,
+      data.mail_body || "",
       "text/html"
     );
 
@@ -312,7 +380,15 @@ async function openMessage(id) {
   }
 }
 
-$("create").onclick = create;
+$("create").onclick = () => {
+  if (mailbox) {
+    status("Use Nova caixa para trocar de endereço.");
+    return;
+  }
+  create();
+};
+
+$("refresh").onclick = refresh;
 
 $("copy").onclick = async () => {
   if (!mailbox) return;
@@ -327,19 +403,17 @@ $("copy").onclick = async () => {
   }
 };
 
-$("refresh").onclick = refresh;
-
-$("clear").onclick = () => {
-  if (!confirm("Criar uma nova caixa temporária?")) {
-    return;
-  }
+$("new").onclick = () => {
+  if (!confirm(
+    "Descartar o acesso à caixa atual e gerar outra?"
+  )) return;
 
   mailbox = null;
-  sessionStorage.removeItem("mdmail");
+  save();
 
   $("detail").classList.add("hidden");
   $("messages").textContent =
-    "Gere um endereço para começar.";
+    "Preparando nova caixa...";
 
   updateUI();
   create();
@@ -351,22 +425,30 @@ $("back").onclick = () => {
 
 try {
   const saved = JSON.parse(
-    sessionStorage.getItem("mdmail")
+    sessionStorage.getItem("mdmail-v5")
   );
 
-  if (saved?.address && saved?.sid_token) {
+  if (
+    saved?.address &&
+    saved?.sid_token
+  ) {
     mailbox = saved;
     refresh();
   }
 } catch {
-  sessionStorage.removeItem("mdmail");
+  sessionStorage.removeItem("mdmail-v5");
 }
 
 setInterval(() => {
-  if (mailbox && !document.hidden) {
+  if (
+    mailbox &&
+    !busy &&
+    !refreshing &&
+    !document.hidden
+  ) {
     refresh();
   }
-}, 20000);
+}, 30000);
 
 updateUI();
 </script>
